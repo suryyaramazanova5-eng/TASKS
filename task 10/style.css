@@ -57,28 +57,20 @@ body{
     height: 325px;
     width: 400px;
      object-fit: contain;
-    
+   
 }
-.price1{
-    color: red;
-}
-
 ul{
     list-style: none;
     padding: 10px;
     background-color: #ebebeb;
-
 }
 .container{
     max-width: 1120px;
     width: 90%;
     margin: 40px auto;
     display: flex;
-    justify-content: space-evenly;
-   
+    justify-content: space-evenly;   
 }
-
-
 
 .buy1:hover{
      text-decoration: underline;
