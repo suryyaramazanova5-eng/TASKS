@@ -3,7 +3,9 @@
 
 
  //task 2
- //const name = "Sureyya";
+ //var name = "Sureyya";
+// console.log(name);
+ 
  
 
  //task 3
