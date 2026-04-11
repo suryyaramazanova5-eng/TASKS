@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "name": "sureyya",
+      "email": "suraya14@gmail.com",
+      "pass": "Suraya14//",
+      "id": "BYZhxKWyfow"
+    },
+    {
+      "name": "nicat",
+      "email": "nicat1@gmail.com",
+      "pass": "Nicat1/",
+      "id": "2Rm4nXrJvcQ"
+    },
+    {
+      "name": "zeyneb",
+      "email": "zeyneb1234@gmail.com",
+      "pass": "Zeyneb123/",
+      "id": "z9cddM0HH9c"
+    },
+    {
+      "name": "sona",
+      "email": "sona1234@gmail.com",
+      "pass": "Sona1234/",
+      "id": "cZHWYeE4CeE"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
