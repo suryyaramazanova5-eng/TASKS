@@ -144,6 +144,59 @@ function Navbar() {
           </div>
         </div>
       </nav>
+<AnimatePresence>
+  {isOpen && (
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setIsOpen(false)}
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[120] md:hidden"
+      />
+
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+        className="fixed top-0 right-0 h-full w-[300px] bg-[#0f0f0f] z-[130] shadow-2xl flex flex-col p-8 md:hidden"
+      >
+        <button 
+          onClick={() => setIsOpen(false)}
+          className="self-end text-white text-3xl mb-12 hover:text-pink-500 transition-colors"
+        >
+          <i className="fa-solid fa-xmark"></i>
+        </button>
+
+        {/* Linklər */}
+        <ul className="flex flex-col gap-8 text-white text-lg tracking-widest uppercase font-light">
+          {["home", "booking", "contact", "abt"].map((item) => {
+            const paths = { home: "/", booking: "/booking", contact: "/contact", abt: "/about" };
+            return (
+              <li key={item} onClick={() => setIsOpen(false)}>
+                <Link
+                  to={paths[item]}
+                  className={`flex items-center justify-between group ${isActive(paths[item]) ? "text-pink-500" : ""}`}
+                >
+                  {t(item)}
+                  <i className={`fa-solid fa-chevron-right text-xs transition-transform group-hover:translate-x-2 ${isActive(paths[item]) ? "opacity-100" : "opacity-0"}`}></i>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="mt-auto pt-10 border-t border-white/10">
+          
+          <p className="text-[10px] text-gray-600 mt-4 uppercase tracking-tighter">
+            ©2026 Sizin Brend. Bütün hüquqlar qorunur.
+          </p>
+        </div>
+      </motion.div>
+    </>
+  )}
+</AnimatePresence>
 
       {/* Modern Profile Modal */}
       <AnimatePresence>
@@ -266,8 +319,6 @@ function Navbar() {
                     </motion.div>
                 )}
 
-                {/* 3. Messages */}
-              {/* 3. Messages */}
 {activeTab === "messages" && (
   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
     <h3 className="text-2xl font-bold text-white mb-4">Message Box</h3>
