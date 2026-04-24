@@ -50,10 +50,9 @@ function Contact() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-      {/* HEADER SECTION */}
       <div
         style={{ backgroundImage: `url(${contact})` }}
-        className="relative w-full h-[350px] sm:h-[400px]  bg-fixed bg-center flex items-center justify-center"
+        className="relative w-full h-[350px] sm:h-[320px]  bg-fixed bg-center flex items-center justify-center"
       >
         <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]"></div>
         <motion.div 
@@ -75,7 +74,6 @@ function Contact() {
           
         
 
-          {/* RIGHT SIDE: MESSAGE FORM */}
           <div className="lg:col-span-7">
             <motion.form
               initial={{ opacity: 0, x: 20 }}
@@ -85,7 +83,7 @@ function Contact() {
             >
               <div className="text-center mb-10">
                 <h2 className="text-3xl font-light text-gray-800">{t("msg")}</h2>
-                <p className="text-gray-400 text-sm mt-2">Sizə 24 saat ərzində geri dönüş edəcəyik.</p>
+                <p className="text-gray-400 text-sm mt-2">Get back to you within 24 hours.</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -131,7 +129,6 @@ function Contact() {
               </button>
             </motion.form>
           </div>
-            {/* LEFT SIDE: CONTACT INFO & FAQ */}
           <div className="lg:col-span-5 space-y-8">
             <div className="bg-white p-8 rounded-[2rem] shadow-xl border border-gray-100">
               <h2 className="text-2xl font-light text-gray-800 mb-8">{t("Bizimlə Əlaqə")}</h2>
@@ -192,12 +189,11 @@ function Contact() {
         </div>
       </div>
 
-      {/* FLOATING SOCIAL MEDIA */}
       <div className="fixed bottom-8 left-8 flex flex-col gap-4 z-50">
         {[
-          { icon: "instagram", link: "https://instagram.com", color: "hover:bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500" },
+          { icon: "instagram",  url: 'https://instagram.com/glamora', color: "hover:bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500" },
           { icon: "telegram", link: "https://t.me", color: "hover:bg-blue-400" },
-          { icon: "facebook", link: "https://facebook.com", color: "hover:bg-blue-600" }
+          { icon: "facebook",url: 'https://facebook.com/glamora', color: "hover:bg-blue-600" }
         ].map((social, idx) => (
           <a
             key={idx}

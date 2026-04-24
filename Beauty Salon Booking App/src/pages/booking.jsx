@@ -29,7 +29,7 @@ function Booking() {
     0
   );
 
-  const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
     e.preventDefault();
     const { name, phone, date, time } = formData;
 
@@ -38,28 +38,38 @@ function Booking() {
       return;
     }
 
-    const saved = JSON.parse(localStorage.getItem("bookings")) || [];
+    const savedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+
+    const isDateTaken = savedBookings.some((b) => b.date === date);
+
+    
+    if (isDateTaken) {
+      toast.error("Təəssüf ki, bu tarix artıq rezerv edilib. Zəhmət olmasa başqa gün seçin.");
+      return;
+    }
+
     const newBookings = selectedServices.map((item) => ({
       id: Date.now() + Math.random(),
       service: item.name,
       price: item.price,
       date: formData.date,
       time: formData.time,
-      userEmail: user.email.toLowerCase().trim(),
+      userEmail: user.email?.toLowerCase().trim() || "unknown", 
       userName: formData.name,
       phone: formData.phone,
     }));
 
-    localStorage.setItem("bookings", JSON.stringify([...saved, ...newBookings]));
+    localStorage.setItem("bookings", JSON.stringify([...savedBookings, ...newBookings]));
+    
     window.dispatchEvent(new Event("storage"));
-    toast.success("Rezervasiya edildi");
+    toast.success("Rezervasiya uğurla tamamlandı!");
 
     setTimeout(() => navigate("/"), 2000);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-      {/* Hero Header */}
       <div
         className="relative w-full h-[300px] flex items-center justify-center bg-center"
         style={{ backgroundImage: `url(${bookingImg})` }}
@@ -83,7 +93,6 @@ function Booking() {
         </h2>
 
         {!user ? (
-          /* Login Required State */
           <div className="bg-white rounded-[2rem] shadow-2xl p-12 text-center max-w-lg mx-auto">
             <div className="w-20 h-20 bg-red-50 text-red-400 rounded-full flex items-center justify-center mx-auto mb-6">
               <i className="fa-solid fa-lock text-3xl"></i>
@@ -97,7 +106,6 @@ function Booking() {
             </button>
           </div>
         ) : selectedServices.length === 0 ? (
-          /* Empty Services State */
           <div className="bg-white rounded-[2rem] shadow-2xl p-12 text-center max-w-2xl mx-auto">
             <img src={servis} alt="servis" className="w-64 mx-auto mb-8 opacity-80" />
             <p className="text-gray-500 text-xl mb-8 font-light">{t("serv")}</p>
@@ -109,10 +117,8 @@ function Booking() {
             </button>
           </div>
         ) : (
-          /* Booking Form & Summary */
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             
-            {/* Order Summary */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -130,7 +136,7 @@ function Booking() {
                       <p className="text-xs text-pink-400 uppercase tracking-widest font-bold">{item.category || "Service"}</p>
                       <p className="text-gray-700 font-medium">{item.name}</p>
                     </div>
-                    <span className="font-semibold text-gray-900">{item.price} AZN</span>
+                    <span className="font-semibold text-gray-900">{item.price} </span>
                   </div>
                 ))}
               </div>
@@ -141,7 +147,6 @@ function Booking() {
               </div>
             </motion.div>
 
-            {/* Form */}
             <motion.div 
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}

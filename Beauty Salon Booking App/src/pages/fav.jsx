@@ -21,7 +21,6 @@ function Fav() {
 
   return (
     <div className="min-h-screen bg-gray-50/50 pb-20">
-      {/* Header Section */}
       <div
         className="relative w-full h-[300px] flex flex-col items-center justify-center   bg-center"
         style={{ backgroundImage: `url(${fav})` }}
@@ -43,15 +42,13 @@ function Fav() {
 
       <div className="max-w-7xl mx-auto px-6 -mt-10 relative z-20">
         {favorites.length === 0 ? (
-          /* Empty State */
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="bg-white rounded-[2rem] shadow-xl p-12 text-center flex flex-col items-center"
           >
             <img src={wishlist} alt="empty" className="w-64 md:w-80 opacity-80 mb-8" />
-            <h3 className="text-2xl font-light text-gray-800 mb-2">{t("13")}</h3>
-            <p className="text-gray-500 mb-8 max-w-md mx-auto">Hələ ki, heç bir xidməti bəyənilənlərə əlavə etməmisiniz.</p>
+            <h3 className="text-2xl font-light text-gray-800 mb-3">{t("13")}</h3>
             <button
               onClick={() => navigate("/services1")}
               className="group flex items-center gap-3 px-10 py-4 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-all duration-300 shadow-lg shadow-pink-200"
@@ -61,7 +58,6 @@ function Fav() {
             </button>
           </motion.div>
         ) : (
-          /* Favorites Grid */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence>
               {favorites.map((item, i) => (
@@ -73,7 +69,6 @@ function Fav() {
                   key={item.name}
                   className="group bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
                 >
-                  {/* Dekorativ element */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-pink-50 rounded-bl-full -z-0 opacity-50 group-hover:bg-pink-100 transition-colors"></div>
 
                   <div className="relative z-10 flex flex-col h-full">
