@@ -12,18 +12,18 @@ function Footer() {
 
       {/* BACKGROUND */}
       <div
-        className="relative w-full h-[350px] sm:h-[450px] md:h-[500px] bg-cover bg-center mt-7"
+        className="relative w-full min-h-[500px] sm:h-[450px] md:h-[500px] bg-cover bg-center mt-7"
         style={{ backgroundImage: `url(${footer})` }}
       >
         {/* OVERLAY */}
         <div className="absolute inset-0 bg-black/60"></div>
 
         {/* CONTENT */}
-        <div className="relative z-10 text-white px-4 sm:px-10 md:px-20 py-8 sm:py-12 h-full flex flex-col justify-between">
+        <div className="relative z-10 text-white px-4 sm:px-10 md:px-20 py-10 sm:py-14 md:py-16 h-full flex flex-col justify-between">
 
           {/* TOP */}
           <div className="text-center mt-6 sm:mt-10">
-            <h1 className="text-xl sm:text-3xl md:text-4xl font-light mb-3 sm:mb-4">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-light mb-3 sm:mb-4 leading-snug">
               Glamora'da gözəlliyinizi kəşf edin!
             </h1>
 
@@ -32,7 +32,7 @@ function Footer() {
             </p>
 
             <button
-              onClick={() => navigate("/booking")}
+              onClick={() => navigate("/contact")}
               className="mt-5 sm:mt-6 px-6 sm:px-8 py-2 sm:py-3 bg-pink-400 text-white rounded-full hover:bg-pink-600 active:scale-95 transition text-sm sm:text-base"
             >
               Bizimlə əlaqə
@@ -41,7 +41,7 @@ function Footer() {
           </div>
 
           {/* GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10 text-xs sm:text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 text-xs sm:text-sm mt-10 sm:mt-0">
 
             {/* BRAND */}
             <div>
@@ -73,7 +73,7 @@ function Footer() {
           </div>
 
           {/* COPYRIGHT */}
-          <div className="text-center text-gray-300 text-[10px] sm:text-xs mt-4">
+          <div className="text-center text-gray-300 text-[10px] sm:text-xs mt-8">
             © 2026 Glamora Beauty. All rights reserved.
           </div>
 

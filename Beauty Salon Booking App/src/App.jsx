@@ -11,6 +11,8 @@ import Admin from "./pages/admin"
 import "./i18n"
 import About from "./pages/about"
 import Opp from "./pages/opp"
+import Fav from "./pages/fav"
+
 import Services1 from "./pages/services1"
 
 
@@ -21,17 +23,18 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />} >
-            <Route  element={<Home />} path="/"  />
+            <Route element={<Home />} path="/" />
             <Route element={<Services />} path="/services" />
             <Route element={<Bookings />} path="/booking" />
             <Route element={<Contact />} path="/contact" />
-            <Route element={<Admin />} path="/admin" />
-            <Route element={<About />} path="/about"/>
-            <Route element={<Opp/>} path="/opp"/>
-            <Route element={<Services1/>} path="/services1"/>
+            <Route element={<About />} path="/about" />
+            <Route element={<Opp />} path="/opp" />
+            <Route element={<Services1 />} path="/services1" />
+            <Route element={<Fav />} path="/fav" />
           </Route>
           <Route element={<Register />} path="/register" />
           <Route element={<Login />} path="/login" />
+          <Route element={<Admin />} path="/admin" />
         </Routes>
       </BrowserRouter>
 

@@ -1,6 +1,7 @@
 import React from "react";
 import services from "../assets/services.jpg";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const service = [
   {
@@ -45,34 +46,36 @@ const service = [
   },
 ];
 
+
+
 function Services() {
   const navigate = useNavigate();
+    const { t } = useTranslation();
+
 
   return (
     <div className="flex flex-col">
 
-      {/* HERO */}
       <div
-        className="relative w-full h-[300px] bg-center bg-cover"
+        className="relative w-full h-[300px] bg-center "
         style={{ backgroundImage: `url(${services})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
 
         <div className="relative flex flex-col items-center justify-center h-full text-white text-center">
           <h1 className="text-4xl md:text-5xl font-light tracking-[0.3em] uppercase italic">
-            Gözəlliyin yeni standartı
+            The new standard of beauty
           </h1>
           <p className="text-xl mt-3">
-            Mükəmməlliyimiz sizin üçündür.
+            {t("muk")}
           </p>
         </div>
       </div>
 
       <h2 className="text-5xl font-light m-15 text-center">
-        Add beauty to your beauty with us
+        {t("add")}
       </h2>
 
-      {/* GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-4 sm:p-6">
         {service.map((item, index) => (
           <div
@@ -83,6 +86,8 @@ function Services() {
               src={item.img}
               alt={item.title}
               className="w-full h-full object-cover group-hover:scale-105  transition duration-500 " />
+                  <div className="absolute inset-0 bg-pink-600 opacity-0 group-hover:opacity-30 transition duration-500"></div>
+
 
             <div className="absolute inset-0 bg-black/40"></div>
 
@@ -101,9 +106,9 @@ function Services() {
 
       <div className="flex justify-center mb-10">
         <button
-          onClick={() => navigate("/services")}
+          onClick={() => navigate("/services1")}
           className="px-8 py-3 bg-pink-400 text-white rounded-full hover:bg-pink-600 hover:scale-105 cursor-pointer m-4">
-          All services
+          {t("all")}
           <i className="fa-solid fa-arrow-right text-xl ml-2"></i>
         </button>
       </div>

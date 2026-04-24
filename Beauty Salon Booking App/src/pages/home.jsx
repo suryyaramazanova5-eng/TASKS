@@ -12,8 +12,7 @@ import g6 from "../assets/g6.jpg";
 import opp11 from "../assets/opp11.jpg";
 import opp22 from "../assets/opp22.jpg";
 import opp33 from "../assets/opp33.jpg";
-
-
+import { motion, AnimatePresence } from "framer-motion";
 
 function Home() {
   const { t } = useTranslation();
@@ -28,24 +27,19 @@ function Home() {
     { img: g6, title: "Laser specialist" },
   ];
 
-  const opp = [
-    { img: opp11 },
-    { img: opp22 },
-    { img: opp33 }
-  ]
+  const opp = [{ img: opp11 }, { img: opp22 }, { img: opp33 }];
 
   const [reviews, setReviews] = useState([]);
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-
   const [editIndex, setEditIndex] = useState(null);
   const [editText, setEditText] = useState("");
   const [editRating, setEditRating] = useState(0);
+  const [selectedMember, setSelectedMember] = useState(null);
 
-  const avg =
-    reviews.length > 0
+  const avg = reviews.length > 0
       ? (reviews.reduce((a, b) => a + b.rating, 0) / reviews.length).toFixed(1)
       : 0;
 
@@ -57,17 +51,11 @@ function Home() {
   const addReview = (e) => {
     e.preventDefault();
     if (!name || !text || rating === 0) return;
-
-    const newReview = { name, text, rating };
+    const newReview = { name, text, rating, date: new Date().toLocaleDateString() };
     const updated = [newReview, ...reviews];
-
     setReviews(updated);
     localStorage.setItem("reviews", JSON.stringify(updated));
-
-    setName("");
-    setText("");
-    setRating(0);
-    setHoverRating(0);
+    setName(""); setText(""); setRating(0);
   };
 
   const deleteReview = (index) => {
@@ -76,335 +64,243 @@ function Home() {
     localStorage.setItem("reviews", JSON.stringify(updated));
   };
 
-  const startEdit = (index, text, rating) => {
-    setEditIndex(index);
-    setEditText(text);
-    setEditRating(rating);
-  };
-
-  const saveEdit = (index) => {
-    const updated = reviews.map((r, i) =>
-      i === index
-        ? { ...r, text: editText, rating: editRating }
-        : r
-    );
-
-    setReviews(updated);
-    localStorage.setItem("reviews", JSON.stringify(updated));
-
-    setEditIndex(null);
-    setEditText("");
-    setEditRating(0);
-  };
-  const [selectedMember, setSelectedMember] = useState(null);
-
   return (
-    <div className="w-full overflow-hidden">
-
-      {/* HERO */}
-      <div
-        className="relative h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(${image})` }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
-
-        <div className="relative z-10 h-full flex flex-col justify-center px-16 gap-6">
-          <h1 className="text-7xl font-bold text-white">
-            Glamora Beauty Salon
-          </h1>
-
-          <p className="text-3xl text-pink-200 italic animate-bounce">{t("title")}</p>
-
-          <div className="flex gap-4 mt-4">
-            <button
-              onClick={() => navigate("/booking")}
-              className="px-8 py-3 bg-pink-600 text-white rounded-full hover:bg-pink-700 cursor-pointer"
-            >
+    <div className="w-full bg-[#fafafa]">
+      {/* --- HERO SECTION --- */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <motion.div 
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 bg-cover bg-fixed bg-center" 
+          style={{ backgroundImage: `url(${image})` }} 
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+        
+        <div className="relative z-10 w-full max-w-7xl px-8 md:px-16">
+          <motion.span 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="text-pink-400 tracking-[0.4em] uppercase text-sm mb-4 block"
+          >
+            Welcome to luxury
+          </motion.span>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-5xl md:text-8xl font-light text-white leading-tight uppercase tracking-tighter"
+          >
+            Glamora <br /> <span className="font-serif italic text-pink-500">Beauty Salon</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-xl text-gray-300 max-w-lg mt-6 font-light"
+          >
+            {t("title")}
+          </motion.p>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex gap-4 mt-10"
+          >
+            <button onClick={() => navigate("/booking")} className="px-10 py-4 bg-pink-600 text-white rounded-full hover:bg-pink-700 transition-all shadow-lg shadow-pink-600/30 font-medium">
               {t("button")}
             </button>
-
-            <button
-              onClick={() => navigate("/services")}
-              className="px-8 py-3 border border-white text-white rounded-full hover:bg-white hover:text-pink-600 cursor-pointer"
-            >
+            <button onClick={() => navigate("/services")} className="px-10 py-4 border border-white/30 text-white rounded-full backdrop-blur-md hover:bg-white hover:text-black transition-all">
               {t("btn")}
             </button>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
-      <div className="py-20 bg-pink-50">
-        <h2 className="text-4xl font-bold text-center mb-12 text-pink-500">
-          GLAMORA TEAM
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-16">
-          {team.map((member, i) => (
-            <div
-              key={i}
-              className="text-center cursor-pointer"
-              onClick={() => setSelectedMember(member)}
-            >
-              <img
-                src={member.img}
-                alt={member.name}
-                className="  object-contain mx-auto shadow-lg hover:scale-105 transition duration-500"
-              />
-
-              <h3 className="mt-4 font-semibold">{member.name}</h3>
-              <p className="text-pink-600">{member.role}</p>
-            </div>
-          ))}
+      {/* --- WEEKLY OFFERS --- */}
+      <section className="py-24 px-8 md:px-16 max-w-7xl mx-auto">
+        <div className="flex justify-between items-end mb-12">
+          <div>
+            <h2 className="text-sm text-pink-500 tracking-[0.3em] uppercase mb-2">Special Offers</h2>
+            <h3 className="text-4xl font-light">{t("weekly")}</h3>
+          </div>
+          <button onClick={() => navigate("/opp")} className="hidden md:flex items-center gap-2 text-gray-500 hover:text-pink-600 transition">
+            {t("imkan")} <i className="fa-solid fa-arrow-right-long"></i>
+          </button>
         </div>
-
-        {/* MODAL */}
-        {selectedMember && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-            <div className="bg-white p-8   md:w-[400px] text-center relative">
-
-              {/* close button */}
-              <button
-                className="absolute top-2 right-3 text-xl"
-                onClick={() => setSelectedMember(null)}
-              >
-                <i className="fa-solid fa-x cursor-pointer"></i>
-              </button>
-
-              {/* image */}
-              <img
-                src={selectedMember.img}
-                alt={selectedMember.name}
-                className=" mx-auto"
-              />
-
-              {/* name */}
-              <h2 className="text-2xl  mt-3">
-                {selectedMember.name}
-              </h2>
-
-              {/* role */}
-              <p className="text-pink-500">{selectedMember.role}</p>
-
-              {/* about */}
-              <p className="mt-3 text-gray-600">
-                {selectedMember.about}
-              </p>
-
-              {/* social icons */}
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-center  text-pink-400  hover:scale-110 transition duration-300">
-                <i className="fa-brands fa-instagram"></i>
-              </a>
-
-            </div>
-          </div>
-        )}
-      </div>
-      {/* WHY CHOOSE US */}
-      <div className="py-20 bg-pink-100 text-center">
-        <h2 className="text-4xl font-bold text-pink-500 mb-10">
-          Niyə Glamora?
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8 px-16">
-          <div>
-            <i className="fa-solid fa-gem text-4xl text-pink-500"></i>
-            <h3 className="mt-4 font-semibold">Premium xidmət</h3>
-            <p>Yüksək keyfiyyətli məhsullar</p>
-          </div>
-
-          <div>
-            <i className="fa-solid fa-user-tie text-4xl text-pink-500"></i>
-            <h3 className="mt-4 font-semibold">Professional heyət</h3>
-            <p>Təcrübəli ustalar</p>
-          </div>
-
-          <div>
-            <i className="fa-solid fa-heart text-4xl text-pink-500"></i>
-            <h3 className="mt-4 font-semibold">Müştəri məmnuniyyəti</h3>
-            <p>100% diqqət və qayğı</p>
-          </div>
-        </div>
-      </div>
-
-
-      {/*opp*/}
-
-      <div>
-        <h2 className="text-5xl font-light m-9 animate-pulse">Don't miss out on weekly opportunities...</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-16 ">
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {opp.map((item, i) => (
-            <div
-              key={i}
-              className="relative group overflow-hidden  shadow-lg "
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -10 }}
+              className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-xl group cursor-pointer"
+              onClick={() => navigate("/opp")}
             >
-              <img
-                onClick={() => navigate("/opp")}
-                src={item.img}
-                alt={item.title}
-                className="w-full  object-cover  transition duration-500 cursor-pointer group-hover:scale-105  "
-              />
-
-
-              <div className="absolute  opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-
+              <img src={item.img} className="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="offer" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                <p className="text-white font-medium">Click to see details</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-        <div className="flex justify-center ">
-          <button
-            onClick={() => navigate("/opp")}
-            className="px-8 py-3 bg-pink-400 text-white rounded-full hover:bg-pink-600 cursor-pointer m-9"
-          >
-            All opportunities
-            <i className="fa-solid fa-arrow-right text-xl "></i>
-          </button>
-        </div>
+      </section>
 
-      </div>
+      {/* --- TEAM SECTION --- */}
+      <section className="py-24 bg-[#080808] text-white">
+  <div className="text-center mb-16">
+    {/* Üst başlıq kiçik və qızılı tonda */}
+    <motion.span 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      className="text-pink-500/80 tracking-[0.5em] uppercase text-[10px] mb-3 block"
+    >
+      Master Artisans
+    </motion.span>
+    
+    <h2 className="text-5xl md:text-6xl font-light tracking-tight mb-4">
+      Meet our <span className="font-serif italic text-pink-500">experts</span>
+    </h2>
+    
+    {/* Sadə xətt yerinə daha modern qradiyent separator */}
+    <div className="w-20 h-[1px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto"></div>
+  </div>
 
-      {/* GALLERY */}
-      <div className="py-20 bg-white">
-        <h2 className="text-4xl font-bold text-center mb-12 text-pink-500">
-          {t("gallery")}
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-16">
-          {gallery.map((item, i) => (
-            <div
-              key={i}
-              className="relative group overflow-hidden rounded-2xl shadow-lg"
-            >
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-72 object-cover group-hover:scale-110 transition duration-500"
-              />
-
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                <h3 className="text-white text-xl font-semibold">
-                  {item.title}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* REVIEWS */}
-      <div className="p-6 bg-pink-50">
-        <h1 className="text-center text-pink-500 text-[32px] font-bold mb-4">
-          {t("rating")}
-        </h1>
-
-        <p className=" text-xl mb-4">
-          Rəylər: {avg} / 5
-        </p>
-
-        <form onSubmit={addReview} className="flex flex-col gap-3 mb-6">
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder={t("name")}
-            className="border p-2 rounded"
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-16 px-8 md:px-32">
+    {team.map((member, i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.1 }}
+        className="group relative cursor-pointer"
+        onClick={() => setSelectedMember(member)}
+      >
+        {/* Şəkil Konteyneri */}
+        <div className="relative aspect-[3/4] overflow-hidden rounded-2xl mb-8">
+          {/* Arxa fondakı yüngül parıltı (glow effect) */}
+          <div className="absolute inset-0 bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          
+          <img
+            src={member.img}
+            className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 filter brightness-75 group-hover:brightness-100"
+            alt={member.name}
           />
 
-          <textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder={t("review")}
-            className="border p-2 rounded"
-          />
 
-          <div className="flex gap-1">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                className={`cursor-pointer ${(hoverRating || rating) >= star
-                  ? "text-yellow-400"
-                  : "text-gray-400"
-                  }`}
-                onMouseEnter={() => setHoverRating(star)}
-                onMouseLeave={() => setHoverRating(0)}
-                onClick={() => setRating(star)}>
-                <i className="fa-solid fa-star"></i>
-              </span>
-            ))}
+          {/* Küncdəki zərif border animasiyası */}
+          <div className="absolute inset-4 border border-white/10 group-hover:border-pink-500/30 transition-all duration-700 rounded-xl"></div>
+        </div>
+
+        {/* Mətn hissəsi - Sol tərəfə hizalanmış daha asimmetrik və modern durur */}
+        <div className="relative pl-4 border-l border-white/5 group-hover:border-pink-500 transition-colors duration-500">
+          <h3 className="text-2xl font-light tracking-wide group-hover:text-pink-500 transition-colors">
+            {member.name}
+          </h3>
+          <p className="text-gray-500 text-xs tracking-[0.2em] uppercase mt-2 group-hover:text-gray-300 transition-colors">
+            {member.role}
+          </p>
+        </div>
+
+        {/* Hover zamanı çıxan kiçik "+" işarəsi və ya detal linki */}
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+          <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+             <i className="fa-solid fa-plus text-xs"></i>
           </div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
-          <button className="bg-pink-500 text-white py-2 rounded cursor-pointer">
-            {t("submit")}
-          </button>
-        </form>
-
-        {/* 🔥 BURASI DÜZƏLDİLDİ */}
-        <div>
-          {reviews.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-6">
-              <i className="fa-regular fa-face-smile text-4xl text-pink-400 mb-2"></i>
-              <p className="text-sm text-gray-500">
-                Hələki rəy yoxdur. İlk rəyi siz yazın
-              </p>
-            </div>
-          ) : (
-            reviews.map((r, idx) => (
-              <div key={idx} className="border-b py-3">
-
-                <div className="flex gap-3 items-center">
-                  <h4 className="font-bold">{r.name}</h4>
-
-                  <i
-                    className="fa-solid fa-trash text-red-600 cursor-pointer"
-                    onClick={() => deleteReview(idx)} />
-
-                  <i
-                    className="fa-solid fa-pen-to-square text-blue-500 cursor-pointer"
-                    onClick={() => startEdit(idx, r.text, r.rating)} />
+      {/* --- REVIEWS SECTION --- */}
+      <section className="py-24 bg-[#0f0f0f] text-white">
+        <div className="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <span className="text-pink-500 font-medium">Testimonials</span>
+            <h2 className="text-5xl font-light mt-4 mb-6">What our <br /> clients say</h2>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="text-6xl font-bold text-pink-500">{avg}</div>
+              <div>
+                <div className="flex text-yellow-400 gap-1">
+                  {[1,2,3,4,5].map(s => <i key={s} className="fa-solid fa-star text-sm"></i>)}
                 </div>
+                <p className="text-gray-400 text-sm mt-1">Based on {reviews.length} reviews</p>
+              </div>
+            </div>
 
-                <div className="flex gap-1 text-yellow-400">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span
-                      key={star}
-                      onClick={() => editIndex === idx && setEditRating(star)}
-                      className={`cursor-pointer ${(editIndex === idx ? editRating : r.rating) >= star
-                        ? "text-yellow-400"
-                        : "text-gray-400"}`} >
-                      <i className="fa-solid fa-star"></i>
-                    </span>
+            <form onSubmit={addReview} className="space-y-4 bg-white/5 p-8 rounded-3xl border border-white/10">
+              <input value={name} onChange={(e) => setName(e.target.value)} placeholder={t("name")} className="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-pink-500 transition" />
+              <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t("review")} className="w-full bg-white/5 border border-white/10 p-4 rounded-xl h-32 outline-none focus:border-pink-500 transition" />
+              <div className="flex justify-between items-center">
+                <div className="flex gap-2">
+                  {[1,2,3,4,5].map(star => (
+                    <i key={star} onClick={() => setRating(star)} onMouseEnter={() => setHoverRating(star)} onMouseLeave={() => setHoverRating(0)}
+                       className={`fa-solid fa-star cursor-pointer text-xl transition ${(hoverRating || rating) >= star ? "text-yellow-400" : "text-white/20"}`} />
                   ))}
                 </div>
-
-                <p
-                  contentEditable={editIndex === idx}
-                  suppressContentEditableWarning={true}
-                  onInput={(e) => setEditText(e.currentTarget.textContent)}
-                  onBlur={() => editIndex === idx && saveEdit(idx)}
-                  className={`outline-none ${editIndex === idx ? "bg-gray-100 px-2 rounded" : ""}`} >
-                  {r.text}
-                </p>
-
+                <button className="bg-pink-600 px-8 py-3 rounded-xl hover:bg-pink-700 transition">Post Review</button>
               </div>
-            ))
-          )}
+            </form>
+          </div>
+
+          <div className="h-[500px] overflow-y-auto pr-4 custom-scrollbar space-y-6">
+            <AnimatePresence>
+              {reviews.map((r, idx) => (
+                <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} key={idx} className="bg-white/5 p-6 rounded-2xl border border-white/5 relative group">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="font-medium text-lg">{r.name}</h4>
+                      <div className="flex text-yellow-500 text-[10px] gap-1 mt-1">
+                        {Array.from({ length: r.rating }).map((_, i) => <i key={i} className="fa-solid fa-star"></i>)}
+                      </div>
+                    </div>
+                    <button onClick={() => deleteReview(idx)} className="opacity-0 group-hover:opacity-100 text-red-500/50 hover:text-red-500 transition">
+                      <i className="fa-solid fa-trash-can"></i>
+                    </button>
+                  </div>
+                  <p className="text-gray-400 font-light italic leading-relaxed">"{r.text}"</p>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.4285485428204!2d49.830693676255315!3d40.37719367144601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d0d71e9898b%3A0x2a9847f372425d29!2sIT%20Brains%20Academy-%20IT%20v%C9%99%20Proqramla%C5%9Fd%C4%B1rma%20kursu!5e0!3m2!1sen!2saz!4v1774803697274!5m2!1sen!2saz" width="100%" height="450"></iframe>
-      <a
-        href="https://wa.me/994515586968"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6  text-green-400 bg-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition z-50"
-      >
-        <i className="fa-brands fa-whatsapp text-2xl"></i>
-      </a>
+      {/* --- CONTACT & MAP --- */}
+      <section className="relative">
+        <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d194473.18552605517!2d49.8552199!3d40.4092616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d40a03531f9%3A0x7593e5954f2c98c7!2sBaku!5e0!3m2!1sen!2saz!4v1715000000000!5m2!1sen!2saz" width="100%" height="500" style={{ border: 0, filter: "grayscale(1) invert(0.9)" }} allowFullScreen="" loading="lazy"></iframe>
+        <a href="https://wa.me/994515586968" target="_blank" rel="noopener noreferrer" className="fixed bottom-10 right-10 w-16 h-16 bg-green-500 text-white flex items-center justify-center rounded-full shadow-2xl hover:scale-110 transition-all z-50 animate-bounce">
+          <i className="fa-brands fa-whatsapp text-3xl"></i>
+        </a>
+      </section>
+
+      {/* --- MODAL TEAM --- */}
+      <AnimatePresence>
+        {selectedMember && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[100] p-6">
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} className="bg-white max-w-4xl w-full rounded-[3rem] overflow-hidden flex flex-col md:flex-row relative">
+              <button onClick={() => setSelectedMember(null)} className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition">
+                <i className="fa-solid fa-xmark text-xl"></i>
+              </button>
+              <div className="md:w-1/2 aspect-square">
+                <img src={selectedMember.img} className="w-full h-full " alt="" />
+              </div>
+              <div className="md:w-1/2 p-12 flex flex-col justify-center">
+                <h2 className="text-4xl font-serif italic mb-2">{selectedMember.name}</h2>
+                <p className="text-pink-600 tracking-widest uppercase text-sm mb-6">{selectedMember.role}</p>
+                <p className="text-gray-600 leading-relaxed mb-8">{selectedMember.about || "Expert in creating beauty and confidence for every client."}</p>
+                <div className="flex gap-4">
+                   <a href="#" className="w-14 h-14 flex items-center justify-center border border-gray-200 rounded-2xl hover:text-pink-600 transition"><i className="fa-brands fa-instagram text-xl"></i></a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-
   );
 }
 

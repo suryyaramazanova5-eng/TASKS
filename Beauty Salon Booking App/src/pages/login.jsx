@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Bounce, toast, ToastContainer } from 'react-toastify'
 import black from '../assets/black.jpg'
+import { useTranslation } from 'react-i18next'
 
 function Login() {
   const [email, setEmail] = useState("")
   const [pass, setPass] = useState("")
   const [errors, setErrors] = useState({})
   const navigate = useNavigate()
+  const { t } = useTranslation();
+  
 
   const logUser = (e) => {
     e.preventDefault()
@@ -29,7 +32,6 @@ function Login() {
 
         if (found) {
 
-          // 🔥 ƏN VACİB HİSSƏ
           localStorage.setItem("user", JSON.stringify({
             name: found.name
           }))
@@ -65,10 +67,10 @@ function Login() {
 
         <form onSubmit={logUser} className="w-full md:w-1/2 p-10 flex flex-col gap-4">
 
-          <h2 className="text-3xl font-bold text-gray-800">Welcome Back</h2>
+          <h2 className="text-3xl font-bold text-gray-800">{t("19")}</h2>
 
           <p className="text-gray-500 text-sm">
-            Hesabınız yoxdur?
+            {t("20")}
             <span onClick={() => navigate("/register")} className="text-pink-500 cursor-pointer ml-2">
               Register
             </span>

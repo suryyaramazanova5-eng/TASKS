@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Bounce, toast, ToastContainer } from 'react-toastify'
 import re from "../assets/re.jpg"
+import { useTranslation } from 'react-i18next'
 
 function Register() {
   const [name, setName] = useState("")
@@ -10,6 +11,8 @@ function Register() {
   const [strength, setStrength] = useState("")
   const [errors, setErrors] = useState({})
   const navigate = useNavigate()
+     const { t } = useTranslation();
+  
 
   const checkStrength = (value) => {
     let score = 0
@@ -63,7 +66,7 @@ function Register() {
         <form 
           onSubmit={addUser} 
           className="w-full max-w-md p-6  flex flex-col gap-4 bg-white/90 shadow-lg relative"  >
-          <h2 className="text-3xl font-bold text-center">Create Account</h2>
+          <h2 className="text-3xl font-bold text-center">{t("22")}</h2>
 
           <input  
             type="text"  
@@ -102,7 +105,7 @@ function Register() {
           {strength && <p className={strength === "Weak" ? "text-red-500" : strength === "Medium" ? "text-yellow-500" : "text-green-500"}>{strength}</p>}
 
           <div className="flex justify-between text-sm">
-            <span>Hesabınız var?</span>
+            <span>{t("21")}</span>
             <span onClick={() => navigate("/login")} className="text-pink-600 cursor-pointer">Login</span>
           </div>
 

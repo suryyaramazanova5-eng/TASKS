@@ -1,28 +1,26 @@
 {
   "users": [
     {
-      "name": "sureyya",
-      "email": "suraya14@gmail.com",
-      "pass": "Suraya14//",
-      "id": "BYZhxKWyfow"
+      "name": "suraye",
+      "email": "suraye@gmail.com",
+      "pass": "Suraye1/",
+      "id": "pu0w7qksRoA"
+    }
+  ],
+  "messages": [
+    {
+      "id": "1",
+      "email": "test@gmail.com",
+      "message": "Salam",
+      "reply": ""
     },
     {
       "name": "nicat",
-      "email": "nicat1@gmail.com",
-      "pass": "Nicat1/",
-      "id": "2Rm4nXrJvcQ"
-    },
-    {
-      "name": "zeyneb",
-      "email": "zeyneb1234@gmail.com",
-      "pass": "Zeyneb123/",
-      "id": "z9cddM0HH9c"
-    },
-    {
-      "name": "sona",
-      "email": "sona1234@gmail.com",
-      "pass": "Sona1234/",
-      "id": "cZHWYeE4CeE"
+      "email": "nicat@gmail.com",
+      "message": "nicat pox",
+      "reply": "",
+      "date": "24/04/2026, 13:01:15",
+      "id": "oPtY8DssXW8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
