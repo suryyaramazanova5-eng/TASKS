@@ -1,11 +1,12 @@
 {
   "users": [
-   
+    {
+      "name": "suraya",
+      "email": "suraya@gmail.com",
+      "pass": "Sureyya06/",
+      "id": "gNUqVQ5PX_E"
+    }
   ],
-  "messages": [
-  
-  ],
-
+  "messages": [],
   "$schema": "./node_modules/json-server/schema.json"
-
 }
