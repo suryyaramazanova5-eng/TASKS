@@ -76,7 +76,7 @@ function AdminPanel() {
                 u.name?.toLowerCase().includes(search.toLowerCase()) ||
                 u.email?.toLowerCase().includes(search.toLowerCase())
             )
-            .reverse(); // Ən son qeydiyyatdan keçənlər yuxarıda
+            .reverse(); 
     }, [users, search]);
 
     const toggleDone = (index) => {
@@ -120,7 +120,6 @@ function AdminPanel() {
     return (
         <div className="min-h-screen bg-[#050505] text-white flex font-sans selection:bg-pink-500/30">
 
-            {/* --- SIDEBAR --- */}
             <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-black/40 backdrop-blur-2xl border-r border-white/5 transition-transform duration-300 md:translate-x-0 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}>
                 <div className="p-8">
                     <h1 className="text-2xl font-light tracking-[0.2em] uppercase">
@@ -143,10 +142,8 @@ function AdminPanel() {
                 </nav>
             </aside>
 
-            {/* --- MAIN CONTENT --- */}
             <main className="flex-1 md:ml-72 min-h-screen relative">
 
-                {/* Mobile Header */}
                 <header className="md:hidden flex justify-between items-center p-6 border-b border-white/5 bg-black/20">
                     <h2 className="text-lg font-medium">Admin</h2>
                     <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 bg-white/5 rounded-lg">
@@ -156,7 +153,6 @@ function AdminPanel() {
 
                 <div className="p-6 md:p-12 max-w-6xl mx-auto">
 
-                    {/* --- DASHBOARD TAB --- */}
                     {activeTab === "dashboard" && (
                         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                             <div className="mb-10">
@@ -257,11 +253,8 @@ function AdminPanel() {
                             </div>
                         </motion.div>
                     )}
-                    {/* --- CUSTOMERS (USERS) TAB --- */}
-{/* --- CUSTOMERS (USERS) TAB --- */}
 {activeTab === "users" && (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        {/* --- HEADER HİSSƏSİ --- */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
             <div>
                 <h2 className="text-2xl md:text-3xl font-light italic">İstifadəçi <span className="font-bold not-italic text-pink-500">Bazası</span></h2>
@@ -289,7 +282,6 @@ function AdminPanel() {
             </div>
         </div>
 
-        {/* --- MOBİL ÜÇÜN KART DİZAYNI --- */}
         <div className="grid grid-cols-1 gap-4 md:hidden">
             {filteredUsers.map((u, i) => (
                 <div key={i} className="bg-white/5 border border-white/10 p-5 rounded-[2rem] flex items-center justify-between group">
@@ -310,7 +302,6 @@ function AdminPanel() {
             ))}
         </div>
 
-        {/* --- DESKTOP ÜÇÜN CƏDVƏL DİZAYNI --- */}
         <div className="hidden md:block bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl">
             <table className="w-full text-left border-collapse">
                 <thead>
@@ -341,7 +332,6 @@ function AdminPanel() {
             </table>
         </div>
         
-        {/* --- YENİ MÜŞTƏRİ MODAL (İŞLƏK KOD) --- */}
         <AnimatePresence>
             {isUserModalOpen && (
                 <div className="fixed inset-0 z-[999] flex items-center justify-center p-6">
@@ -397,7 +387,6 @@ function AdminPanel() {
         </AnimatePresence>
     </motion.div>
 )}
-                    {/* --- RESERVATIONS TAB --- */}
                     {activeTab === "reservations" && (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                             <h2 className="text-2xl font-light mb-8">Rezervasiya <span className="font-bold text-pink-500">Siyahısı</span></h2>
@@ -432,7 +421,6 @@ function AdminPanel() {
                         </motion.div>
                     )}
 
-                    {/* --- MESSAGES TAB --- */}
                   {activeTab === "messages" && (
   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
     <h2 className="text-2xl font-light mb-8">
@@ -495,7 +483,6 @@ function AdminPanel() {
 
                 </div>
 
-                {/* --- FOOTER BAR --- */}
                 <footer className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-center text-[10px] text-gray-600 uppercase tracking-widest border-t border-white/5">
                     <span>Glamora System v2.4</span>
 

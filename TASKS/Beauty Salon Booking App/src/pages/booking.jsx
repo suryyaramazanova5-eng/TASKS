@@ -33,30 +33,22 @@ function Booking() {
     e.preventDefault();
     const { name, phone, date, time } = formData;
 
-    // 1. Sahələrin doldurulma yoxlaması
     if (!name || !phone || !date || !time) {
       toast.error("Bütün xanaları doldurun");
       return;
     }
 
-    // 2. Mövcud rezervasiyaları gətiririk
     const savedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-    // 3. Eyni günə rezervasiya olub-olmadığını yoxlayırıq
-    // Qeyd: Burada həm tarixi, həm də (istəyə görə) vaxtı yoxlaya bilərsiniz.
-    // Əgər sadəcə "həmin gün doludur" demək istəyirsinizsə:
+
     const isDateTaken = savedBookings.some((b) => b.date === date);
 
-    /* Əgər daha spesifik yoxlama istəyirsinizsə (məsələn, eyni günün eyni saatı):
-       const isTimeSlotTaken = savedBookings.some((b) => b.date === date && b.time === time);
-    */
-
+    
     if (isDateTaken) {
       toast.error("Təəssüf ki, bu tarix artıq rezerv edilib. Zəhmət olmasa başqa gün seçin.");
       return;
     }
 
-    // 4. Yeni rezervasiyaları hazırlayırıq
     const newBookings = selectedServices.map((item) => ({
       id: Date.now() + Math.random(),
       service: item.name,
@@ -68,7 +60,6 @@ function Booking() {
       phone: formData.phone,
     }));
 
-    // 5. Yaddaşa yazırıq
     localStorage.setItem("bookings", JSON.stringify([...savedBookings, ...newBookings]));
     
     window.dispatchEvent(new Event("storage"));
@@ -79,7 +70,6 @@ function Booking() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-      {/* Hero Header */}
       <div
         className="relative w-full h-[300px] flex items-center justify-center bg-center"
         style={{ backgroundImage: `url(${bookingImg})` }}
@@ -103,7 +93,6 @@ function Booking() {
         </h2>
 
         {!user ? (
-          /* Login Required State */
           <div className="bg-white rounded-[2rem] shadow-2xl p-12 text-center max-w-lg mx-auto">
             <div className="w-20 h-20 bg-red-50 text-red-400 rounded-full flex items-center justify-center mx-auto mb-6">
               <i className="fa-solid fa-lock text-3xl"></i>
@@ -117,7 +106,6 @@ function Booking() {
             </button>
           </div>
         ) : selectedServices.length === 0 ? (
-          /* Empty Services State */
           <div className="bg-white rounded-[2rem] shadow-2xl p-12 text-center max-w-2xl mx-auto">
             <img src={servis} alt="servis" className="w-64 mx-auto mb-8 opacity-80" />
             <p className="text-gray-500 text-xl mb-8 font-light">{t("serv")}</p>
@@ -129,10 +117,8 @@ function Booking() {
             </button>
           </div>
         ) : (
-          /* Booking Form & Summary */
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             
-            {/* Order Summary */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -161,7 +147,6 @@ function Booking() {
               </div>
             </motion.div>
 
-            {/* Form */}
             <motion.div 
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}

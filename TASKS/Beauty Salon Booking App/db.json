@@ -1,27 +1,11 @@
 {
   "users": [
-    {
-      "name": "Famil Ibrahimov",
-      "email": "famil12@gmail.com",
-      "pass": "Famil12/",
-      "id": "3RVFABiwF1w"
-    },
-    {
-      "name": "nicat ramazan",
-      "email": "nicat@gmail.com",
-      "pass": "Nicat1/",
-      "id": "bwb5tCid4b0"
-    }
+   
   ],
   "messages": [
-    {
-      "name": "fami qaqa",
-      "email": "famil12@gmail.com",
-      "message": "buruq sacin daha qeseydi",
-      "reply": "ayy cox sagolll",
-      "date": "24/04/2026, 17:56:06",
-      "id": "jGXp3WlNKI0"
-    }
+  
   ],
+
   "$schema": "./node_modules/json-server/schema.json"
+
 }

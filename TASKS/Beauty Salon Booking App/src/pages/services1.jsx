@@ -22,7 +22,6 @@ function Services1() {
         JSON.parse(localStorage.getItem("favorites")) || []
     );
 
-    // Seçilən servislərin sayını izləmək üçün animasiya effekti
     const toggleFavorite = (item) => {
         let updated;
         const exists = favorites.find((i) => i.name === item.name);
@@ -47,7 +46,7 @@ function Services1() {
     const filteredData = servicesData
         .map((cat) => {
             const matchCategory = normalize(cat.category) === normalize(activeCategory);
-            if (!matchCategory && !search) return null; // Axtarış yoxdursa yalnız aktiv kateqoriyanı göstər
+            if (!matchCategory && !search) return null;
 
             const searchLower = search.toLowerCase();
             const filteredItems = cat.items?.filter((item) =>
@@ -69,7 +68,6 @@ function Services1() {
 
     return (
         <div className="min-h-screen bg-gray-50 pb-24">
-            {/* Hero Section */}
             <div className="relative w-full h-[350px] bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${services1})` }}>
                 <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
                 <div className="relative flex flex-col items-center justify-center h-full text-white text-center px-4">
@@ -84,7 +82,6 @@ function Services1() {
                 </div>
             </div>
 
-            {/* Sticky Search & Category Bar */}
             <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-sm border-b">
                 <div className="max-w-6xl mx-auto">
                     <div className="p-4 flex flex-col md:flex-row gap-4 items-center">
@@ -118,7 +115,6 @@ function Services1() {
                 </div>
             </div>
 
-            {/* Services List */}
             <div className="max-w-5xl mx-auto p-6 mt-8">
                 <AnimatePresence mode="wait">
                     {filteredData.length === 0 ? (
@@ -178,7 +174,6 @@ function Services1() {
                 </AnimatePresence>
             </div>
 
-            {/* Floating Booking Button */}
             {selectedServices.length > 0 && (
                 <motion.div 
                     initial={{ y: 100 }}
@@ -202,7 +197,6 @@ function Services1() {
     );
 }
 
-// Alt komponent: Servis sətiri
 const ServiceItem = ({ item, isSelected, isFav, onToggle, onFav }) => (
     <div className="group flex items-center justify-between py-2 border-b border-dashed border-gray-200 hover:border-pink-200 transition-colors">
         <div className="flex flex-col">

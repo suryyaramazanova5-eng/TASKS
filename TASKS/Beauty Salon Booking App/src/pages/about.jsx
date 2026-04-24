@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 function About() {
     const { t } = useTranslation();
 
-    // Animasiya variantları
     const fadeInUp = {
         initial: { opacity: 0, y: 30 },
         whileInView: { opacity: 1, y: 0 },
@@ -16,7 +15,6 @@ function About() {
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white pb-24">
-            {/* HERO SECTION */}
             <div
                 className="relative w-full h-[500px] md:h-[550px] bg-cover bg-fixed bg-center flex items-center justify-center"
                 style={{ backgroundImage: `url(${about})` }}
@@ -37,7 +35,6 @@ function About() {
                 </motion.div>
             </div>
 
-            {/* STORY SECTION */}
             <div className="max-w-5xl mx-auto px-6 -mt-20 relative z-20">
                 <motion.div
                     {...fadeInUp}
@@ -65,7 +62,6 @@ function About() {
                     </div>
                 </motion.div>
             </div>
-            {/* STATS COUNTER SECTION */}
             <div className="max-w-7xl mx-auto px-6 mt-32 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 {[
                     { count: "10+", label: "Years Experience" },
@@ -84,7 +80,6 @@ function About() {
                 ))}
             </div>
 
-            {/* CORE VALUES / STATS */}
             <div className="max-w-7xl mx-auto px-6 mt-32">
                 <div className="grid md:grid-cols-3 gap-10">
                     {[
@@ -112,7 +107,6 @@ function About() {
                 </div>
             </div>
 
-            {/* FOOTER NOTE */}
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}

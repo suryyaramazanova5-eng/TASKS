@@ -70,7 +70,6 @@ function Home() {
 
   return (
     <div className="w-full bg-[#fafafa]">
-      {/* --- HERO SECTION --- */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div
           initial={{ scale: 1.1 }}
@@ -122,7 +121,6 @@ function Home() {
         </div>
       </section>
 
-      {/* --- WEEKLY OFFERS --- */}
       <section className="py-24 px-8 md:px-12 max-w-7xl mx-auto">
         <div className="flex justify-between items-end mb-12">
           <div>
@@ -150,10 +148,8 @@ function Home() {
         </div>
       </section>
 
-      {/* --- TEAM SECTION --- */}
       <section className="py-24 bg-[#080808] text-white">
         <div className="text-center mb-16">
-          {/* Üst başlıq kiçik və qızılı tonda */}
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -166,7 +162,6 @@ function Home() {
             Meet our <span className="font-serif italic text-pink-500">experts</span>
           </h2>
 
-          {/* Sadə xətt yerinə daha modern qradiyent separator */}
           <div className="w-20 h-[1px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto"></div>
         </div>
 
@@ -181,9 +176,7 @@ function Home() {
               className="group relative cursor-pointer"
               onClick={() => setSelectedMember(member)}
             >
-              {/* Şəkil Konteyneri */}
               <div className="relative aspect-[3/4] overflow-hidden rounded-2xl mb-8">
-                {/* Arxa fondakı yüngül parıltı (glow effect) */}
                 <div className="absolute inset-0 bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
                 <img
@@ -193,11 +186,9 @@ function Home() {
                 />
 
 
-                {/* Küncdəki zərif border animasiyası */}
                 <div className="absolute inset-4 border border-white/10 group-hover:border-pink-500/30 transition-all duration-700 rounded-xl"></div>
               </div>
 
-              {/* Mətn hissəsi - Sol tərəfə hizalanmış daha asimmetrik və modern durur */}
               <div className="relative pl-4 border-l border-white/5 group-hover:border-pink-500 transition-colors duration-500">
                 <h3 className="text-2xl font-light tracking-wide group-hover:text-pink-500 transition-colors">
                   {member.name}
@@ -207,7 +198,6 @@ function Home() {
                 </p>
               </div>
 
-              {/* Hover zamanı çıxan kiçik "+" işarəsi və ya detal linki */}
               <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
                 <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
                   <i className="fa-solid fa-plus text-xs"></i>
@@ -217,7 +207,6 @@ function Home() {
           ))}
         </div>
       </section>
-      {/* --- GALLERY SECTION --- */}
       <section className="py-24 px-6 md:px-12 max-w-[1800px] mx-auto">
   <div className="text-center mb-16">
     <h2 className="text-sm text-pink-500 tracking-[0.4em] uppercase mb-3 font-bold">Our Masterpieces</h2>
@@ -226,7 +215,6 @@ function Home() {
     </h3>
   </div>
 
-  {/* Yenilənmiş Simmetrik Grid */}
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
     {gallery.map((item, index) => (
       <motion.div
@@ -238,10 +226,10 @@ function Home() {
         className={`relative overflow-hidden rounded-[2.5rem] group cursor-pointer shadow-xl transition-all duration-500
           ${
             index === 6 
-            ? "lg:col-span-1 h-[400px] md:h-[400px]" // Glamora Man: Enli və diqqətçəkən
+            ? "lg:col-span-1 h-[400px] md:h-[400px]" 
             : index === 1 || index === 4 
-            ? "md:row-span-2 h-[500px] md:h-[820px]" // Uzun şəkillər
-            : "h-[350px] md:h-[400px]" // Standart şəkillər
+            ? "md:row-span-2 h-[500px] md:h-[820px]" 
+            : "h-[350px] md:h-[400px]" 
           }
         `}
       >
@@ -265,7 +253,6 @@ function Home() {
   </div>
 </section>
 
-      {/* --- REVIEWS SECTION --- */}
       <section className="py-24 bg-[#0f0f0f] text-white">
         <div className="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
           <div>
@@ -319,7 +306,6 @@ function Home() {
         </div>
       </section>
 
-      {/* --- CONTACT & MAP --- */}
       <section className="relative">
         <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d194473.18552605517!2d49.8552199!3d40.4092616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d40a03531f9%3A0x7593e5954f2c98c7!2sBaku!5e0!3m2!1sen!2saz!4v1715000000000!5m2!1sen!2saz" width="100%" height="500" style={{ border: 0, filter: "grayscale(1) invert(0.9)" }} allowFullScreen="" loading="lazy"></iframe>
         <a href="https://wa.me/994515586968" target="_blank" rel="noopener noreferrer" className="fixed bottom-10 right-10 w-16 h-16 bg-green-500 text-white flex items-center justify-center rounded-full shadow-2xl hover:scale-110 transition-all z-50 animate-bounce">
@@ -327,7 +313,6 @@ function Home() {
         </a>
       </section>
 
-      {/* --- MODAL TEAM --- */}
       <AnimatePresence>
         {selectedMember && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[100] p-6">

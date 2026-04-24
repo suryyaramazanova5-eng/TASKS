@@ -27,18 +27,15 @@ function Login() {
     fetch("http://localhost:3001/users")
       .then(res => res.json())
       .then(data => {
-        // Email-i kiçik hərflərlə yoxlayırıq ki, daxiletmə həssaslığı azalsın
         const found = data.find(u => u.email.toLowerCase() === email.toLowerCase() && u.pass === pass)
 
         if (found) {
-          // KRİTİK DÜZƏLİŞ: Email-i də localStorage-a yazırıq ki, digər səhifələrdə xəta verməsin
           localStorage.setItem("user", JSON.stringify({
             name: found.name,
             email: found.email,
             phone: found.phone || ""
           }))
 
-          // Navbar və digər komponentləri xəbərdar etmək üçün event tetikləyirik
           window.dispatchEvent(new Event("storage"));
 
           toast.success("Xoş gəldiniz!", {
@@ -57,19 +54,17 @@ function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f0f2f5] p-4 font-sans relative overflow-hidden">
-      {/* Arxa fon bəzəyi */}
       <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-pink-200 rounded-full blur-[120px] opacity-50"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-100 rounded-full blur-[120px] opacity-50"></div>
 
       <ToastContainer />
       
-      {/* Geri qayıt düyməsi */}
       <button 
         onClick={() => navigate("/")}
         className="absolute top-8 left-8 flex items-center gap-2 text-gray-500 hover:text-pink-600 transition-all group z-10"
       >
         <i className="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
-        <span className="text-sm font-medium">Geri qayıt</span>
+        <span className="text-sm font-medium">Go back</span>
       </button>
 
       <motion.div 
@@ -77,7 +72,6 @@ function Login() {
         animate={{ opacity: 1, y: 0 }}
         className="flex bg-white/80 backdrop-blur-md rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden max-w-4xl w-full border border-white"
       >
-        {/* Sol tərəf - Şəkil */}
         <div className="hidden md:flex w-1/2 bg-cover bg-center relative" style={{ backgroundImage: `url(${black})` }}>
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
           <div className="absolute bottom-12 left-10 text-white space-y-2">
@@ -93,14 +87,14 @@ function Login() {
           </div>
         </div>
 
-        {/* Sağ tərəf - Form */}
         <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center">
           <div className="mb-10 text-left">
             <h2 className="text-4xl font-bold text-gray-900 mb-3 tracking-tight">{t("19")}</h2>
             <p className="text-gray-500 font-medium">
               {t("20")} 
               <span onClick={() => navigate("/register")} className="text-pink-500 cursor-pointer ml-1 hover:underline decoration-2 underline-offset-4">
-                Register              </span>
+                Register
+              </span>
             </p>
           </div>
 
@@ -118,7 +112,7 @@ function Login() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs uppercase tracking-widest text-gray-400 ml-1 font-bold">Şifrə</label>
+              <label className="text-xs uppercase tracking-widest text-gray-400 ml-1 font-bold">Password</label>
               <input 
                 type="password" 
                 placeholder="••••••••" 

@@ -50,7 +50,6 @@ function Contact() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-      {/* HEADER SECTION */}
       <div
         style={{ backgroundImage: `url(${contact})` }}
         className="relative w-full h-[350px] sm:h-[320px]  bg-fixed bg-center flex items-center justify-center"
@@ -75,7 +74,6 @@ function Contact() {
           
         
 
-          {/* RIGHT SIDE: MESSAGE FORM */}
           <div className="lg:col-span-7">
             <motion.form
               initial={{ opacity: 0, x: 20 }}
@@ -131,7 +129,6 @@ function Contact() {
               </button>
             </motion.form>
           </div>
-            {/* LEFT SIDE: CONTACT INFO & FAQ */}
           <div className="lg:col-span-5 space-y-8">
             <div className="bg-white p-8 rounded-[2rem] shadow-xl border border-gray-100">
               <h2 className="text-2xl font-light text-gray-800 mb-8">{t("Bizimlə Əlaqə")}</h2>
@@ -192,7 +189,6 @@ function Contact() {
         </div>
       </div>
 
-      {/* FLOATING SOCIAL MEDIA */}
       <div className="fixed bottom-8 left-8 flex flex-col gap-4 z-50">
         {[
           { icon: "instagram",  url: 'https://instagram.com/glamora', color: "hover:bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500" },

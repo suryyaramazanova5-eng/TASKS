@@ -53,7 +53,6 @@ function Services() {
 
   return (
     <div className="flex flex-col bg-white">
-      {/* Hero Section */}
       <div
         className="relative w-full h-[400px] bg-center bg-cover flex items-center justify-center shadow-inner"
         style={{ backgroundImage: `url(${services})` }}
@@ -75,7 +74,6 @@ function Services() {
         </motion.div>
       </div>
 
-      {/* Section Title */}
       <div className="py-16 px-6">
         <h2 className="text-4xl md:text-5xl font-light text-center text-gray-800 tracking-tight">
           {t("add")}
@@ -85,7 +83,6 @@ function Services() {
         </p>
       </div>
 
-      {/* Services Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 md:p-12 max-w-[1600px] mx-auto">
         {serviceList.map((item, index) => (
           <motion.div
@@ -94,18 +91,15 @@ function Services() {
             onClick={() => navigate("/services1")}
             className="relative h-[450px] group overflow-hidden rounded-[2rem] cursor-pointer shadow-2xl shadow-gray-200"
           >
-            {/* Image */}
             <img
               src={item.img}
               alt={item.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             
-            {/* Overlays */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
             <div className="absolute inset-0 bg-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-            {/* Content */}
             <div className="absolute bottom-8 left-8 right-8 text-white">
               <div className="flex items-center gap-4 mb-3">
                 <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-xl border border-white/30 group-hover:bg-pink-500 group-hover:border-pink-500 transition-all duration-300">
@@ -127,7 +121,6 @@ function Services() {
         ))}
       </div>
 
-      {/* Call to Action Button */}
       <div className="flex flex-col items-center justify-center py-16 bg-gray-50/50">
         <p className="text-gray-400 text-sm mb-6 italic">Everything for your beauty</p>
         <button
