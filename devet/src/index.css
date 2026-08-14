@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --font-pinyon: "Pinyon Script", cursive;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-fraunces: "Fraunces", serif;
+}
+
+/* --- Animasiya Kodları (Buradan aşağısı blokdan kənarda olmalıdır) --- */
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+@keyframes sway {
+  0% { transform: translateX(-30px); }
+  100% { transform: translateX(30px); }
+}
+
+.petal-item {
+  position: absolute;
+  top: -10vh;
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: normal, alternate;
+  will-change: transform;
+}
