@@ -146,7 +146,7 @@ export default function RSVP() {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full bg-[#b8860b] hover:bg-[#9d7205] text-white py-4 tracking-[5px] transition-all"
+              className="w-full bg-[#b8860b] hover:bg-[#9d7205] text-white py-4 tracking-[5px] transition-all cursor-pointer"
             >
               ♡ CAVABI GÖNDƏR
             </button>

@@ -109,6 +109,8 @@ function App() {
                         </div>
                         <a href='#rsvp' className="inline-block px-11 py-3 border mt-8 border-[#A66F30] text-[#A66F30] hover:bg-[#A66F30] hover:text-white transition-all duration-500 text-[10px] tracking-widest uppercase">
                             Cavab göndər
+                            <i className="fa-solid fa-arrow-down-long text-xl gap-3"></i>
+
                         </a>
                     </div>
                 </section>
